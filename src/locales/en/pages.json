@@ -276,6 +276,44 @@
     "supportText": "Contact your system administrator or reach out to",
     "supportEmail": "support@example.com"
   },
+  "verifyEmail": {
+    "title": "Verify Your Email",
+    "description": "Please check your email and enter the verification code to complete your registration",
+    "verifyYourEmail": "Verify Your Email",
+    "enterCode": "Enter the 6-digit verification code sent to {{email}}",
+    "verificationCodeLabel": "Verification Code",
+    "verificationCodePlaceholder": "Enter 6-digit code",
+    "verifyCode": "Verify Code",
+    "didNotReceiveCode": "Didn't receive the code?",
+    "resendCode": "Resend Code",
+    "resendIn": "Resend in {{seconds}}s",
+    "alreadyHaveAccount": "Already have an account? ",
+    "signIn": "Sign In",
+    "invalidOTP": "Invalid OTP code"
+  },
+  "onboarding": {
+    "invalidInvitation": "Invalid Invitation",
+    "goToLogin": "Go to Login",
+    "missingEmail": "Missing or invalid email address."
+  },
+  "setupProfile": {
+    "title": "Set Up Profile",
+    "description": "Please set your password to complete your account setup",
+    "fullName": "Full Name",
+    "enterFullName": "Enter your full name",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "passwordRequirements": "Password Requirements",
+    "atLeast8Characters": "At least 8 characters",
+    "oneUppercaseLetter": "One uppercase letter",
+    "oneLowercaseLetter": "One lowercase letter",
+    "oneNumber": "One number",
+    "passwordsMatch": "Passwords match",
+    "settingUpProfile": "Setting up profile...",
+    "alreadyHaveAccount": "Already have an account?",
+    "signIn": "Sign In",
+    "failedToUpdateProfile": "Failed to update profile. Please try again."
+  },
   "audits": {
     "title": "Recent Activities",
     "description": "Monitor recent administrative actions and system changes",

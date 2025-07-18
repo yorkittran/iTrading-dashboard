@@ -376,5 +376,43 @@
     "needHelp": "Precisa de Ajuda?",
     "supportText": "Entre em contato com seu administrador do sistema ou envie um email para",
     "supportEmail": "support@example.com"
+  },
+  "verifyEmail": {
+    "title": "Verifique Seu Email",
+    "description": "Por favor, verifique seu email e digite o código de verificação para completar seu registro",
+    "verifyYourEmail": "Verifique Seu Email",
+    "enterCode": "Digite o código de verificação de 6 dígitos enviado para {{email}}",
+    "verificationCodeLabel": "Código de Verificação",
+    "verificationCodePlaceholder": "Digite o código de 6 dígitos",
+    "verifyCode": "Verificar Código",
+    "didNotReceiveCode": "Não recebeu o código?",
+    "resendCode": "Reenviar Código",
+    "resendIn": "Reenviar em {{seconds}}s",
+    "alreadyHaveAccount": "Já tem uma conta? ",
+    "signIn": "Entrar",
+    "invalidOTP": "Código OTP inválido"
+  },
+  "onboarding": {
+    "invalidInvitation": "Convite Inválido",
+    "goToLogin": "Ir para Login",
+    "missingEmail": "Endereço de email ausente ou inválido."
+  },
+  "setupProfile": {
+    "title": "Configurar Perfil",
+    "description": "Por favor, defina sua senha para completar a configuração da sua conta",
+    "fullName": "Nome Completo",
+    "enterFullName": "Digite seu nome completo",
+    "newPassword": "Nova Senha",
+    "confirmPassword": "Confirmar Senha",
+    "passwordRequirements": "Requisitos da Senha",
+    "atLeast8Characters": "Pelo menos 8 caracteres",
+    "oneUppercaseLetter": "Uma letra maiúscula",
+    "oneLowercaseLetter": "Uma letra minúscula",
+    "oneNumber": "Um número",
+    "passwordsMatch": "Senhas coincidem",
+    "settingUpProfile": "Configurando perfil...",
+    "alreadyHaveAccount": "Já tem uma conta?",
+    "signIn": "Entrar",
+    "failedToUpdateProfile": "Falha ao atualizar o perfil. Por favor, tente novamente."
   }
 }

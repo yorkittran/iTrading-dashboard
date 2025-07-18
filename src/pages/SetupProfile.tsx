@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Shield, AlertCircle, CheckCircle, X, Lock } from 'lucide-react';
 import { Button, FormField } from '../components/atoms';
 import { updateUserProfile } from '../services/userService';
-import { useTranslation } from '../hooks/useTranslation'
+import { usePageTranslation, useTranslation } from '../hooks/useTranslation'
 
 interface SetupProfileForm {
   fullName: string;
@@ -22,7 +22,8 @@ const SetupProfile: React.FC = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const { t } = useTranslation()
+  const { t } = usePageTranslation()
+  const { t: tCommon } = useTranslation() // For common translations
 
   // Extract password validation logic
   const validatePassword = (password: string, confirmPassword: string) => ({
@@ -60,7 +61,7 @@ const SetupProfile: React.FC = () => {
         password: form.password,
       });
       if (!success) {
-        setError(updateError || 'Failed to update profile. Please try again.');
+        setError(updateError || t('setupProfile.failedToUpdateProfile'));
         return;
       }
       // Update user status to 'active' in users table
@@ -83,7 +84,7 @@ const SetupProfile: React.FC = () => {
       navigate('/login');
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : 'Failed to update profile. Please try again.'
+        err instanceof Error ? err.message : t('setupProfile.failedToUpdateProfile')
       );
     } finally {
       setLoading(false);
@@ -99,10 +100,10 @@ const SetupProfile: React.FC = () => {
             <Shield className='w-8 h-8 text-white' />
           </div>
           <h1 className='text-2xl font-bold text-gray-900 dark:text-white mb-2'>
-            {t('set_up_profile')}
+            {t('setupProfile.title')}
           </h1>
           <p className='text-gray-600 dark:text-gray-300'>
-            {t('please_set_your_password_to_complete_your_account_setup')}
+            {t('setupProfile.description')}
           </p>
         </div>
         <form onSubmit={handleSubmit} className='space-y-6'>
@@ -117,18 +118,18 @@ const SetupProfile: React.FC = () => {
           )}
           {/* Full Name Field */}
           <FormField
-            label={t('full_name')}
+            label={t('setupProfile.fullName')}
             name='fullName'
             value={form.fullName}
             onChange={handleChange}
             required
             autoFocus
-            placeholder={t('enter_your_full_name')}
+            placeholder={t('setupProfile.enterFullName')}
             size='lg'
           />
           {/* Password Field */}
           <FormField
-            label={t('new_password')}
+            label={t('setupProfile.newPassword')}
             name='password'
             type='password'
             value={form.password}
@@ -138,11 +139,11 @@ const SetupProfile: React.FC = () => {
             showPasswordToggle
             icon={<Lock className='w-5 h-5' />}
             size='lg'
-            placeholder={t('password')}
+            placeholder={tCommon('general.password')}
           />
           {/* Confirm Password Field */}
           <FormField
-            label={t('confirm_password')}
+            label={t('setupProfile.confirmPassword')}
             name='confirmPassword'
             type='password'
             value={form.confirmPassword}
@@ -152,33 +153,33 @@ const SetupProfile: React.FC = () => {
             showPasswordToggle
             icon={<Lock className='w-5 h-5' />}
             size='lg'
-            placeholder={t('confirm_password')}
+            placeholder={t('setupProfile.confirmPassword')}
           />
           {/* Password Requirements */}
           <div className='bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4'>
             <p className='text-sm font-medium text-gray-700 dark:text-gray-300 mb-3'>
-              {t('password_requirements')}
+              {t('setupProfile.passwordRequirements')}
             </p>
             <div className='space-y-2'>
               <PasswordRequirement
                 met={passwordValidation.minLength}
-                text={t('at_least_8_characters')}
+                text={t('setupProfile.atLeast8Characters')}
               />
               <PasswordRequirement
                 met={passwordValidation.hasUppercase}
-                text={t('one_uppercase_letter')}
+                text={t('setupProfile.oneUppercaseLetter')}
               />
               <PasswordRequirement
                 met={passwordValidation.hasLowercase}
-                text={t('one_lowercase_letter')}
+                text={t('setupProfile.oneLowercaseLetter')}
               />
               <PasswordRequirement
                 met={passwordValidation.hasNumber}
-                text={t('one_number')}
+                text={t('setupProfile.oneNumber')}
               />
               <PasswordRequirement
                 met={passwordValidation.matches}
-                text={t('passwords_match')}
+                text={t('setupProfile.passwordsMatch')}
               />
             </div>
           </div>
@@ -190,20 +191,20 @@ const SetupProfile: React.FC = () => {
             fullWidth
             disabled={!isPasswordValid}
             loading={loading}
-            loadingText={t('setting_up_profile')}
+            loadingText={t('setupProfile.settingUpProfile')}
           >
-            {t('set_up_profile')}
+            {t('setupProfile.title')}
           </Button>
         </form>
         {/* Footer */}
         <div className='mt-6 text-center'>
           <p className='text-sm text-gray-500 dark:text-gray-400'>
-            {t('already_have_an_account')}{' '}
+            {t('setupProfile.alreadyHaveAccount')}{' '}
             <button
               onClick={() => navigate('/login')}
               className='text-teal-600 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-300 font-medium transition-colors'
             >
-              {t('sign_in')}
+              {t('setupProfile.signIn')}
             </button>
           </p>
         </div>

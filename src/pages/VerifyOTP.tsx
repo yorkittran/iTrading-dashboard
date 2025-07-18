@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Shield, AlertCircle, Mail, RefreshCw } from 'lucide-react'
 import { toast } from '../utils/toast'
-import { useTranslation } from '../hooks/useTranslation'
+import { usePageTranslation, useTranslation } from '../hooks/useTranslation'
 import { verifyOTP, sendInvitationOTP } from '../services/otpService'
 import { FormField, Button } from '../components/atoms'
 
@@ -20,7 +20,8 @@ function useResendCountdown(initial: number) {
 
 const VerifyOTP: React.FC = () => {
   const navigate = useNavigate()
-  const { t } = useTranslation()
+  const { t } = usePageTranslation()
+  const { t: tCommon } = useTranslation() // For common translations like users.resendInvitationSuccess
   const [searchParams] = useSearchParams()
   const email = searchParams.get('email') || ''
   // Optionally, get role from query string or default to 'moderator'
@@ -51,7 +52,7 @@ const VerifyOTP: React.FC = () => {
       localStorage.setItem('otp_verified_email', email)
       navigate(`/setup-profile?email=${encodeURIComponent(email)}`)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Invalid OTP code')
+      setError(err instanceof Error ? err.message : t('verifyEmail.invalidOTP'))
     } finally {
       setIsLoading(false)
     }
@@ -64,10 +65,10 @@ const VerifyOTP: React.FC = () => {
       const { success, error: resendError } = await sendInvitationOTP(email, role)
       if (!success) throw new Error(resendError)
       setResendCountdown(60)
-      toast.success(t('users.resendInvitationSuccess'))
+      toast.success(tCommon('users.resendInvitationSuccess'))
     } catch (err) {
-      setError(err instanceof Error ? err.message : t('users.resendInvitationError'))
-      toast.error(t('users.resendInvitationError'))
+      setError(err instanceof Error ? err.message : tCommon('users.resendInvitationError'))
+      toast.error(tCommon('users.resendInvitationError'))
     } finally {
       setIsResending(false)
     }
@@ -83,7 +84,7 @@ const VerifyOTP: React.FC = () => {
           <h1 className='text-2xl font-bold text-gray-900 dark:text-white mb-4'>
             {t('onboarding.invalidInvitation')}
           </h1>
-          <p className='text-gray-600 dark:text-gray-300 mb-6'>Missing or invalid email address.</p>
+          <p className='text-gray-600 dark:text-gray-300 mb-6'>{t('onboarding.missingEmail')}</p>
           <Button onClick={() => navigate('/login')} variant='primary' size='md' fullWidth>
             {t('onboarding.goToLogin')}
           </Button>
